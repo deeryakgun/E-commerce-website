@@ -1,0 +1,28 @@
+@model e_commerce.Models.Category
+
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@*@<h1>Sil</h1>*@
+
+<h3>Bu kategoriyi silmek istediğinizden emin misiniz ?</h3>
+<div>
+    @*<h4>Kategori</h4>*@
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.CategoryName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.CategoryName)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="CategoryId" />
+        <input type="submit" value="Sil" class="btn btn-danger" /> |
+        <a asp-action="Index">Listeyi Görüntüle </a>
+    </form>
+</div>

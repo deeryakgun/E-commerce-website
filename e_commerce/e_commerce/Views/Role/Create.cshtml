@@ -1,0 +1,46 @@
+﻿
+
+@{
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+    <div class="container mt-4">
+        <h1>Rol Ekleme Sayfası</h1>
+        <form id="roleForm" method="post" asp-controller="Role" asp-action="Create">
+            <div class="form-group">
+                <label for="roleName">Rol Başlığı</label>
+                <input type="text" id="roleName" name="name" class="form-control" />
+            </div>
+            <button type="submit" class="btn btn-outline-info col-12">Kaydet</button>
+        </form>
+        <div id="message" class="mt-3"></div>
+    </div>
+
+    <script>$(document).ready(function () {
+            $('#roleForm').on('submit', function (e) {
+                e.preventDefault(); // Formun normal şekilde gönderilmesini engelle
+
+                $.ajax({
+                    url: $(this).attr('action'), // Formun action URL'sini al
+                    type: 'POST', // POST yöntemi kullan
+                    data: $(this).serialize(), // Form verilerini serileştir
+                    success: function (response) {
+                        // Başarılı olduğunda
+                        $('#message').html('<div class="alert alert-success">Rol başarıyla eklendi!</div>');
+                        $('#roleForm')[0].reset(); // Formu sıfırla
+                    },
+                    error: function (xhr) {
+                        // Hata olduğunda
+                        $('#message').html('<div class="alert alert-danger">Rol eklenirken bir hata oluştu.</div>');
+                    }
+                });
+            });
+        });</script>
+</body>
+</html>

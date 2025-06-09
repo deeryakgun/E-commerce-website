@@ -1,0 +1,66 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(RunConfiguration)' == 'e_commerce' " />
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.33" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.33">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.33">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="6.0.33" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.17" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.33" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.33" />
+    <PackageReference Include="NETCore.MailKit" Version="2.1.0" />
+    <PackageReference Include="RestSharp" Version="112.0.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Data\" />
+    <None Remove="Component\" />
+    <None Remove="Views\Shared\Component\TrendList\" />
+    <None Remove="Views\Shared\Component\SliderList\" />
+    <None Remove="Views\Shared\Components\" />
+    <None Remove="Oturum\" />
+    <None Remove="Dto\" />
+    <None Remove="Views\Shared\Components\CartSumList\" />
+    <None Remove="Views\Cart\" />
+    <None Remove="Views\Login\" />
+    <None Remove="Views\Register\" />
+    <None Remove="Views\Role\" />
+    <None Remove="Views\Payment\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Data\" />
+    <Folder Include="Component\" />
+    <Folder Include="Views\Shared\Components\TrendList\" />
+    <Folder Include="wwwroot\Urunler\" />
+    <Folder Include="Views\Shared\Components\SliderList\" />
+    <Folder Include="wwwroot\Slider\" />
+    <Folder Include="Views\Shared\Components\" />
+    <Folder Include="Oturum\" />
+    <Folder Include="Dto\" />
+    <Folder Include="Views\Shared\Components\CartSumList\" />
+    <Folder Include="Views\Cart\" />
+    <Folder Include="Views\Login\" />
+    <Folder Include="Views\Register\" />
+    <Folder Include="Views\Role\" />
+    <Folder Include="Views\Payment\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Remove="wwwroot\Urunler\" />
+    <Content Remove="wwwroot\Slider\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\.editorconfig" />
+  </ItemGroup>
+</Project>

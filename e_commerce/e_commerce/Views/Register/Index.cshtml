@@ -1,0 +1,221 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Kayıt Ol</title>
+
+    <!-- Custom fonts for this template-->
+    <link href="https://cdn.jsdelivr.net/npm/@@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,300,400,600,700,800,900" rel="stylesheet">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/Home/css/renk.css" rel="stylesheet">
+
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+</head>
+<body class="bg-gradient-primary">
+    <div class="container">
+        <div class="card o-hidden border-0 shadow-lg my-5">
+            <div class="card-body p-0">
+                <div class="row">
+                    <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
+                    <div class="col-lg-7">
+                        <div class="p-5">
+                            <div class="text-center">
+                                <h1 class="h4 text-gray-900 mb-4">Hesap Oluştur</h1>
+                            </div>
+                            <form id="registrationForm">
+                                <div class="form-group row">
+                                    <input type="text" id="FirstName" name="FirstName" class="form-control form-control-user" placeholder="Adınız" />
+                                    <span id="FirstNameError" class="text-danger"></span>
+                                </div>
+                                <div class="form-group row">
+                                    <input type="text" id="LastName" name="LastName" class="form-control form-control-user" placeholder="Soyadınız" />
+                                    <span id="LastNameError" class="text-danger"></span>
+                                </div>
+                                <div class="form-group row">
+                                    <input type="text" id="UserName" name="UserName" class="form-control form-control-user" placeholder="Kullanıcı Adı" />
+                                    <span id="UserNameError" class="text-danger"></span>
+                                </div>
+                                <div class="form-group row">
+                                    <input type="email" id="Email" name="Email" class="form-control form-control-user" placeholder="Email" />
+                                    <span id="EmailError" class="text-danger"></span>
+                                </div>
+                                <div class="form-group row">
+                                    <input type="text" id="City" name="City" class="form-control form-control-user" placeholder="Şehir" />
+                                    <span id="CityError" class="text-danger"></span>
+                                </div>
+                                <div class="form-group row">
+                                    <input type="password" id="Password" name="Password" class="form-control form-control-user" placeholder="Şifre" />
+                                    <span id="PasswordError" class="text-danger"></span>
+                                </div>
+                                <div class="form-group row">
+                                    <input type="password" id="ConfirmPassword" name="ConfirmPassword" class="form-control form-control-user" placeholder="Şifre Tekrar" />
+                                    <span id="ConfirmPasswordError" class="text-danger"></span>
+                                </div>
+                                <input type="submit" value="Kayıt Ol" class="btn btn-primary btn-user btn-block" />
+                            </form>
+                            <hr>
+                            <div class="text-center">
+                                <a class="small" href="forgot-password.html">Şifremi Unuttum</a>
+                            </div>
+                            <div class="text-center">
+                                <a class="small" href="Login">Zaten bir hesabın var mı?</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Modal Kodu -->
+    <div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog" aria-labelledby="confirmationModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmationModalLabel">Onay Kodunu Giriniz</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Size gönderilen onay kodunu giriniz:</p>
+                    <form id="confirmationForm">
+                        <div class="form-group">
+                            <label for="ConfirmCode">Onay Kodu</label>
+
+                            <input type="text" id="ConfirmCode" name="ConfirmCode" class="form-control" placeholder="Onay Kodu" />
+                            <input type="email" id="Email" name="Email" class="form-control" hidden/>
+
+                        </div>
+                        <input type="submit" value="Onayla" class="btn btn-success" />
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            $('#registrationForm').submit(function (e) {
+                e.preventDefault(); // Varsayılan form gönderimini engelle
+
+                var formData = {
+                    FirstName: $('#FirstName').val(),
+                    LastName: $('#LastName').val(),
+                    UserName: $('#UserName').val(),
+                    Email: $('#Email').val(),
+                    City: $('#City').val(),
+                    Password: $('#Password').val(),
+                    ConfirmPassword: $('#ConfirmPassword').val()
+                };
+
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("Index", "Register")',
+                    contentType: 'application/json; charset=utf-8',
+                    data: JSON.stringify(formData), // JSON formatında form verilerini gönder
+                    success: function (response) {
+
+                        if (response.showModal) {
+                            $('#confirmationModal').modal('show');
+                        } else {
+
+                            var errorMessages = '';
+                            if (response.errors) {
+                                for (var key in response.errors) {
+                                    if (response.errors.hasOwnProperty(key)) {
+                                        errorMessages += response.errors[key] + '<br>';
+                                    }
+                                }
+                            }
+
+                            Swal.fire({
+                                icon: "error",
+                                title: "Oops...",
+                                html: errorMessages,
+                                footer: '<a href="#">Why do I have this issue?</a>'
+                            });
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        console.log("Hata: " + error);
+                    }
+                });
+            });
+        });
+    </script>
+
+
+    <script>
+        $(document).ready(function () {
+
+            $('#confirmationForm').submit(function (e) {
+                e.preventDefault(); // Varsayılan form gönderimini engelle
+
+                var formData = {
+                    Mail: $('#Email').val(), 
+                    ConfirmCode: $('#ConfirmCode').val()
+                };
+
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("ConfirmMail", "Register")',
+                    contentType: 'application/json; charset=utf-8',
+                    data: JSON.stringify(formData), // JSON formatında form verilerini gönder
+                    success: function (response) {
+
+                        if (response.showModal) {
+                            Swal.fire({
+                                
+                                icon: "success",
+                                title: "Kaydınız başarıyla gerçekleşti.",
+                                showConfirmButton: false,
+                                timer: 1500
+                            }).then(function () {
+                                window.location.href = 'https://localhost:7236/Login';
+                            })
+
+                            
+                        } else {
+
+                            var errorMessages = '';
+                            if (response.errors) {
+                                for (var key in response.errors) {
+                                    if (response.errors.hasOwnProperty(key)) {
+                                        errorMessages += response.errors[key] + '<br>';
+                                    }
+                                }
+                            }
+
+                            Swal.fire({
+                                icon: "error",
+                                title: "Hata",
+                                html: "Onay kodunu yanlış girdiniz.",
+                                footer: '<a href="#">Why do I have this issue?</a>'
+                            });
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        console.log("Hata: " + error);
+                    }
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>

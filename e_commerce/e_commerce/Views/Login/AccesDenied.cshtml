@@ -1,0 +1,32 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yetkisiz Erişim</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card border-danger">
+                    <div class="card-header bg-danger text-white">
+                        <h4>Erişim Engellendi</h4>
+                    </div>
+                    <div class="card-body">
+                        <p>Bu sayfaya erişim izniniz yok.</p>
+                        <p>Lütfen daha fazla bilgi için sistem yöneticinizle iletişime geçin.</p>
+                        <a href="javascript:history.back()" class="btn btn-secondary">Geri Dön</a>
+                        <a href="@Url.Action("Index", "Home")" class="btn btn-primary">Ana Sayfaya Git</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

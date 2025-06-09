@@ -1,0 +1,102 @@
+﻿@model e_commerce.Models.PaymentViewModel
+
+
+
+
+
+<div class="container-fluid pt-5">
+    <div class="row px-xl-5">
+        <div class="col-lg-8">
+            <h4 class="mb-4">Sepet Özeti</h4>
+            <table class="table table-bordered text-center mb-5">
+                <thead class="bg-secondary text-dark">
+                    <tr>
+                        <th>Ürünler</th>
+                        <th>Fiyat</th>
+                        <th>Miktar</th>
+                        <th>Toplam</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in @ViewBag.CartViewModel.CartItems)
+                    {
+                        <tr>
+                            <td class="align-middle">@item.ProductName</td>
+                            <td class="align-middle">$@item.Price</td>
+                            <td class="align-middle">@item.Quantity</td>
+                            <td class="align-middle">$@item.Total</td>
+                        </tr>
+                    }
+                    <tr>
+                        <td colspan="3" class="text-right"><strong>Toplam Ürün Tutarı:</strong></td>
+                        <td class="align-middle">$@ViewBag.CartViewModel.GrandTotal</td>
+                    </tr>
+                   
+                </tbody>
+            </table>
+        </div>
+
+
+
+
+
+
+        <div class="container mt-5">
+
+            <h2>Ödeme Sayfası</h2>
+
+            @if (TempData["Message"] != null)
+            {
+                <div class="alert alert-success">
+                    @TempData["Message"]
+                </div>
+            }
+
+            @using (Html.BeginForm("Index", "Payment", FormMethod.Post))
+            {
+                <input type="hidden" name="amount" value="@ViewBag.CartViewModel.GrandTotal" />
+
+                @Html.AntiForgeryToken()
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CardHolderName)
+                    @Html.TextBoxFor(model => model.CardHolderName, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.CardHolderName)
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CardNumber)
+                    @Html.TextBoxFor(model => model.CardNumber, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.CardNumber)
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ExpireYear)
+                    @Html.TextBoxFor(model => model.ExpireYear, new { @class = "form-control", placeholder = "YYYY" })
+                    @Html.ValidationMessageFor(model => model.ExpireYear)
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ExpireMonth)
+                    @Html.TextBoxFor(model => model.ExpireMonth, new { @class = "form-control", placeholder = "MM" })
+                    @Html.ValidationMessageFor(model => model.ExpireMonth)
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CVV)
+                    @Html.TextBoxFor(model => model.CVV, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.CVV)
+                </div>
+
+
+
+                <button type="submit" class="btn btn-primary">Ödeme Yap</button>
+            }
+        </div>
+
+
+
+        @*
+            @section Scripts {
+                @Scripts.Render("~/bundles/jqueryval")
+            }
+        *@

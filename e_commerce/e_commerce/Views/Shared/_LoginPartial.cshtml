@@ -1,0 +1,33 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<AppUser> SignInManager
+@inject UserManager<AppUser> UserManager
+
+@if (SignInManager.IsSignedIn(User))
+{
+    <div class="nav-item dropdown">
+        <a href="#" class="nav-link dropdown-toggle" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            @User.Identity.Name
+        </a>
+        <div class="dropdown-menu rounded-0 m-0" aria-labelledby="userDropdown">
+            <a href="https://localhost:7236/Home/UserDetails" class="dropdown-item">Profilim</a>
+            <a href="https://localhost:7236/Orders" class="dropdown-item">Siparişlerim</a>
+        </div>
+    </div>
+
+
+    <a href="https://localhost:7236/Products" class="nav-item nav-link">Admin Paneli</a>
+    <a href="/Logout" class="nav-item nav-link">Güvenli Çıkış</a>
+
+    <a class="nav-item nav-link">&nbsp;&nbsp;</a>
+    <a class="nav-item nav-link">&nbsp;&nbsp;</a>
+    <a class="nav-item nav-link">&nbsp;&nbsp;</a>
+
+
+}
+else
+{
+    <a href="/Login" class="nav-item nav-link">Giriş Yap</a>
+    <a href="/Register" class="nav-item nav-link">Kayıt Ol</a>
+    <a class="nav-item nav-link">&nbsp;&nbsp;</a>
+    <a class="nav-item nav-link">&nbsp;&nbsp;</a>
+}

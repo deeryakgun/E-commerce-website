@@ -1,0 +1,34 @@
+﻿
+    /* Arka plan rengini değiştirme */
+.bg-primary {
+    background-color: #D05423 !important; /* Yeni arka plan rengi */
+}
+
+/* Yazı rengini değiştirme */
+.text-primary {
+    color: #D05423 !important; /* Yeni yazı rengi */
+}
+
+/* Birincil buton rengini değiştirme */
+.btn-primary {
+    background-color: #D05423; /* Yeni buton arka plan rengi */
+    border-color: #D05423; /* Yeni buton kenar rengi */
+}
+
+
+
+/* Link ve diğer elemanlarda kullanılan mavi renkler */
+a {
+    color: #D05423;
+}
+
+/* Footer arka plan rengini değiştirme */
+.footer {
+    background-color: #FFCA66; /* Yeni arka plan rengini burada tanımlayın */
+}
+
+/* Eğer mevcut class'ı özelleştirmek istiyorsanız */
+.bg-secondary {
+    background-color: #FFCA66 !important; /* Bootstrap sınıfını özelleştirin */
+}
+
