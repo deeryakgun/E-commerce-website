@@ -74,7 +74,7 @@ namespace e_commerce.Controllers
                     using (var client = new SmtpClient())
                     {
                         client.Connect("smtp.gmail.com", 587, false);
-                        client.Authenticate("akgunderyaa@gmail.com", "azvg yxsv wccg nbiz"); // Güvenlik için parola yerine uygulama şifresi kullanın
+                        client.Authenticate("akgunderyaa@gmail.com", "my password"); // Güvenlik için parola yerine uygulama şifresi kullanın
                         client.Send(mimeMessage);
                         client.Disconnect(true);
                     }
